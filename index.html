@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XocoLate - Chocolatería Artesanal</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* Estilos Personalizados y Aplicación de Fuentes */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fdf8f2; /* Fondo crema claro */
+        }
+        h1, h2, h3, .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        .bg-chocolate-800 { background-color: #4A2E2A; }
+        .bg-chocolate-700 { background-color: #6B4F4B; }
+        .bg-chocolate-100 { background-color: #EFEBE9; }
+        .text-gold-500 { color: #D4AF37; }
+        .border-gold-500 { border-color: #D4AF37; }
+        .ring-gold-500 { --tw-ring-color: #D4AF37; }
+        
+        /* Comportamiento de desplazamiento suave */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Transición personalizada para el carrito */
+        #cart-sidebar {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        /* Animación para el modal */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .modal-fade-in {
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="text-chocolate-800">
+
+    <!-- Encabezado y Navegación -->
+    <header class="bg-chocolate-800 text-white shadow-lg sticky top-0 z-40">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-3xl font-display font-bold text-gold-500">XocoLate</a>
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#productos" class="hover:text-gold-500 transition duration-300">Catálogo</a>
+                <a href="#nosotros" class="hover:text-gold-500 transition duration-300">Nosotros</a>
+                <a href="#contacto" class="hover:text-gold-500 transition duration-300">Contacto</a>
+            </nav>
+            <div class="flex items-center">
+                <button id="cart-button" class="relative hover:text-gold-500 transition duration-300">
+                    <i class="fas fa-shopping-cart text-xl"></i>
+                    <span id="cart-count" class="absolute -top-2 -right-3 bg-gold-500 text-chocolate-800 text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                </button>
+                <button id="mobile-menu-button" class="md:hidden ml-6 text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Menú Móvil -->
+        <div id="mobile-menu" class="hidden md:hidden bg-chocolate-700">
+            <a href="#productos" class="block text-center py-3 px-4 text-sm hover:bg-gold-500 hover:text-chocolate-800 transition duration-300">Catálogo</a>
+            <a href="#nosotros" class="block text-center py-3 px-4 text-sm hover:bg-gold-500 hover:text-chocolate-800 transition duration-300">Nosotros</a>
+            <a href="#contacto" class="block text-center py-3 px-4 text-sm hover:bg-gold-500 hover:text-chocolate-800 transition duration-300">Contacto</a>
+        </div>
+    </header>
+
+    <!-- Sección Hero -->
+    <section class="bg-chocolate-100 py-20">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold text-chocolate-800 leading-tight">El Arte del Chocolate Hecho a Mano</h1>
+            <p class="mt-4 text-lg text-chocolate-700 max-w-2xl mx-auto">Descubre una sinfonía de sabores únicos, creados con pasión y los mejores granos de cacao.</p>
+            <a href="#productos" class="mt-8 inline-block bg-gold-500 text-chocolate-800 font-bold py-3 px-8 rounded-lg shadow-lg hover:bg-opacity-90 transition duration-300 transform hover:scale-105">Ver Productos</a>
+        </div>
+    </section>
+
+    <!-- Sección "Nosotros" -->
+    <section id="nosotros" class="py-20">
+        <div class="container mx-auto px-6 flex flex-col md:flex-row items-center gap-12">
+            <div class="md:w-1/2">
+                <picture>
+                    <source srcset="images/nosotros_banner.webp" type="image/webp">
+                    <!-- CORRECCIÓN: Se ha cerrado correctamente la etiqueta img -->
+                    <img src="images/nosotros_banner.jpg" 
+                         onerror="this.onerror=null;this.src='https://placehold.co/600x400/4A2E2A/fdf8f2?text=XocoLate';"
+                         alt="Artesanos preparando chocolate a mano en un taller rústico." class="rounded-lg shadow-2xl w-full">
+                </picture>
+            </div>
+            <div class="md:w-1/2">
+                <h2 class="text-4xl font-display font-bold text-chocolate-800">Nuestra Pasión, Tu Deleite</h2>
+                <p class="mt-4 text-gray-600">En XocoLate, cada pieza es una obra de arte. Nacimos de un sueño por revivir las recetas tradicionales con un toque moderno y audaz. Seleccionamos a mano cada ingrediente, asegurando que solo lo mejor llegue a tu paladar. Somos más que chocolateros; somos artesanos de momentos felices.</p>
+                <p class="mt-4 text-gray-600">Nuestra filosofía se basa en la pureza, la calidad y la creatividad. Te invitamos a explorar nuestro mundo y a enamorarte del verdadero sabor del chocolate.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Productos -->
+    <section id="productos" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-display font-bold text-center text-chocolate-800 mb-12">Catálogo de Delicias</h2>
+            <div id="product-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                <!-- Las tarjetas de producto serán inyectadas aquí por JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Contacto -->
+    <section id="contacto" class="py-20 bg-chocolate-100">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl font-display font-bold text-chocolate-800">Ponte en Contacto</h2>
+            <p class="mt-4 text-lg text-chocolate-700 max-w-2xl mx-auto">¿Pedidos especiales o preguntas? Estamos aquí para ayudarte.</p>
+            <div class="mt-8 text-chocolate-700">
+                <p class="text-xl"><i class="fas fa-envelope mr-2 text-gold-500"></i> xocolate@gmail.com</p>
+                <p class="text-xl mt-2"><i class="fas fa-phone mr-2 text-gold-500"></i> 7712794633</p>
+                <p class="text-xl mt-2"><i class="fas fa-map-marker-alt mr-2 text-gold-500"></i> Los viñedos </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pie de Página -->
+    <footer class="bg-chocolate-800 text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025 XocoLate. Todos los derechos reservados.</p>
+            <div class="flex justify-center space-x-6 mt-4">
+                <a href="#" class="hover:text-gold-500 transition duration-300"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="hover:text-gold-500 transition duration-300"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="hover:text-gold-500 transition duration-300"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal de Producto -->
+    <div id="product-modal" class="fixed inset-0 bg-black bg-opacity-70 z-50 hidden items-center justify-center p-4">
+        <div id="modal-content" class="bg-white rounded-lg shadow-2xl w-full max-w-2xl max-h-full overflow-y-auto p-6 relative modal-fade-in">
+            <!-- El contenido del modal será inyectado aquí -->
+        </div>
+    </div>
+
+    <!-- Barra Lateral del Carrito -->
+    <div id="cart-sidebar" class="fixed top-0 right-0 h-full w-full max-w-md bg-white shadow-2xl z-50 transform translate-x-full">
+        <div class="flex flex-col h-full">
+            <div class="flex justify-between items-center p-6 border-b border-gray-200">
+                <h3 class="text-2xl font-display text-chocolate-800">Tu Carrito</h3>
+                <button id="close-cart-button" class="text-2xl text-gray-500 hover:text-chocolate-800">&times;</button>
+            </div>
+            <div id="cart-items" class="flex-grow p-6 overflow-y-auto">
+                <!-- Los ítems del carrito serán inyectados aquí -->
+                <p id="cart-empty-message" class="text-gray-500">Tu carrito está vacío.</p>
+            </div>
+            <div class="p-6 border-t border-gray-200">
+                <div class="flex justify-between items-center text-lg font-bold">
+                    <span>Total:</span>
+                    <span id="cart-total">$0.00</span>
+                </div>
+                <button id="checkout-button" class="w-full mt-4 bg-gold-500 text-chocolate-800 font-bold py-3 rounded-lg shadow-lg hover:bg-opacity-90 transition duration-300">Finalizar Compra</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- DATOS ---
+        const products = [
+            { id: 1, name: "Mangos Deshidratados Enchilados Cubiertos", price: 95.00, description: "Trozos de mango dulce y jugoso, deshidratados a la perfección, cubiertos con una capa de chile picosito y bañados en nuestro exclusivo chocolate oscuro.", unit: "100g", category: "Enchilados Cubiertos", image: "mango_enchilado.webp", placeholder: "Mango Enchilado" },
+            { id: 2, name: "Pulparindos Cubiertos", price: 15.00, description: "El clásico dulce de tamarindo que amas, llevado a otro nivel con una generosa cobertura de chocolate semiamargo. La combinación perfecta de dulce, ácido y picoso.", unit: "pieza", category: "Enchilados Cubiertos", image: "pulparindo_cubierto.webp", placeholder: "Pulparindo Cubierto" },
+            { id: 3, name: "Barra de Piña y Arándano Enchilado", price: 75.00, description: "Una barra energética y exótica con trozos de piña y arándanos, un toque de chile en polvo y una base de chocolate oscuro para balancear los sabores.", unit: "pieza", category: "Barras", image: "barra_pina_arandano.webp", placeholder: "Barra de Piña" },
+            { id: 4, name: "Barras de Mango y Arándano Enchilado", price: 75.00, description: "La dulzura del mango se une a la acidez del arándano en esta barra enchilada, todo sobre una capa de nuestro cremoso chocolate con leche.", unit: "pieza", category: "Barras", image: "barra_mango_arandano.webp", placeholder: "Barra de Mango" },
+            { id: 5, name: "Barra de almendra y coco", price: 75.00, description: "Chocolate blanco cremoso cargado de almendras tostadas y coco rallado. Un escape tropical en cada mordida.", unit: "pieza", category: "Barras", image: "barra_almendra_coco.webp", placeholder: "Barra de Almendra" },
+            { id: 6, name: "Barra de Oreo", price: 75.00, description: "Trozos crujientes de tu galleta favorita mezclados en un suave chocolate blanco. La indulgencia que no sabías que necesitabas.", unit: "pieza", category: "Barras", image: "barra_oreo.webp", placeholder: "Barra de Oreo" },
+            { id: 7, name: "Barra de Almendra con Sal de Mar", price: 75.00, description: "Chocolate oscuro al 70% con almendras enteras tostadas y un toque de sal de mar en escamas para intensificar el sabor del cacao.", unit: "pieza", category: "Barras", image: "barra_almendra_sal.webp", placeholder: "Barra Sal de Mar" },
+            { id: 8, name: "Barra Arándano con Nuez", price: 75.00, description: "Una combinación clásica y deliciosa. Chocolate con leche, arándanos deshidratados y trozos de nuez pecana.", unit: "pieza", category: "Barras", image: "barra_arandano_nuez.webp", placeholder: "Barra Arándano" },
+            { id: 9, name: "Enjambre de Chocolate", price: 30.00, description: "Hojuelas de maíz crujientes unidas por un delicioso y abundante baño de chocolate con leche. Un clásico que nunca falla.", unit: "pieza", category: "Especialidades", image: "enjambre_chocolate.webp", placeholder: "Enjambre" },
+            { id: 10, name: "Rocas de Frutos Secos", price: 95.00, description: "Una mezcla rústica de almendras, nueces y pistachos, ligeramente tostados y cubiertos irregularmente con chocolate oscuro.", unit: "100g", category: "Especialidades", image: "rocas_frutos_secos.webp", placeholder: "Rocas de Frutos" },
+            { id: 11, name: "Músicos", price: 25.00, description: "Finos discos de chocolate (oscuro, leche y blanco) adornados con una composición de frutos secos y frutas confitadas. Una joya visual y de sabor.", unit: "2 piezas", category: "Especialidades", image: "musicos.webp", placeholder: "Músicos" },
+            { id: 12, name: "Ciruelas con Nuez", price: 55.00, description: "Ciruelas pasas deshuesadas, rellenas con media nuez y bañadas en una capa gruesa de chocolate semiamargo.", unit: "5 piezas", category: "Frutas Cubiertas", image: "ciruelas_nuez.webp", placeholder: "Ciruelas con Nuez" },
+            { id: 13, name: "Dátil con Nuez", price: 60.00, description: "Dátiles medjool suaves y dulces, rellenos de nuez pecana y cubiertos por completo con nuestro chocolate de la casa.", unit: "5 piezas", category: "Frutas Cubiertas", image: "datil_nuez.webp", placeholder: "Dátil con Nuez" },
+            { id: 14, name: "Figura de Chocolate Macizo", price: 95.00, description: "Figuras temáticas de temporada hechas completamente de nuestro mejor chocolate con leche. Perfectas para regalar.", unit: "100g", category: "Figuras", image: "figura_maciza.webp", placeholder: "Figura Maciza" },
+            { id: 15, name: "Cuadrito de Amaranto con Nuez", price: 30.00, description: "Una 'alegría' tradicional con amaranto inflado y nuez, unida con miel y cubierta con una base de chocolate oscuro.", unit: "pieza", category: "Especialidades", image: "cuadrito_amaranto.webp", placeholder: "Cuadrito de Amaranto" },
+            { id: 16, name: "Tortugas de Chocolate", price: 40.00, description: "Nueces pecanas tostadas, cubiertas con nuestro caramelo casero y selladas con un disco de chocolate con leche. Un clásico americano perfeccionado.", unit: "pieza", category: "Especialidades", image: "tortugas_chocolate.webp", placeholder: "Tortugas" },
+            { id: 17, name: "Malvavisco Cubierto", price: 15.00, description: "Malvaviscos suaves y esponjosos, ensartados en un palito y bañados en chocolate cremoso. Una delicia simple y divertida.", unit: "pieza", category: "Cubiertos", image: "malvavisco_cubierto.webp", placeholder: "Malvavisco" },
+            { id: 18, name: "Figura Rellena de Fresa", price: 95.00, description: "Una hermosa figura de chocolate blanco que esconde un corazón cremoso de ganache de fresa natural.", unit: "100g", category: "Figuras", image: "figura_fresa.webp", placeholder: "Figura de Fresa" },
+            { id: 19, name: "Piña enchilada cubierta de chocolate", price: 20.00, description: "Una audaz explosión de sabor. La combinación perfecta de piña dulce y picante, abrazada por una suave capa de cremoso chocolate. Un antojo irresistible.", unit: "4 piezas", category: "Enchilados Cubiertos", image: "pina_enchilada.webp", placeholder: "Piña Enchilada" },
+            { id: 20, name: "Pretzel cubierto con chocolate", price: 80.00, description: "Crujientes pretzels horneados y bañados en una generosa capa de delicioso chocolate. El balance ideal entre dulce y salado que te encantará en cada mordida. ¡El snack perfecto para cualquier momento del día!", unit: "100g", category: "Cubiertos", image: "pretzel_cubierto.webp", placeholder: "Pretzel Cubierto" },
+            { id: 21, name: "Barra de frutos secos", price: 85.00, description: "Una barra nutritiva y deliciosa, repleta de una mezcla premium de almendras, nueces, y arándanos, unida con un toque de miel y chocolate oscuro. La energía que necesitas con el sabor que te encanta.", unit: "pieza", category: "Barras", image: "barra_frutos_secos.webp", placeholder: "Barra Frutos Secos" },
+            { id: 22, name: "Lámina de Chocafé y Nuez", price: 95.00, description: "Finas láminas de chocolate oscuro infusionado con café de grano, cubiertas con trozos crujientes de nuez tostada. Una experiencia intensa y sofisticada para los amantes del café y el chocolate.", unit: "100g", category: "Especialidades", image: "lamina_chococafe_nuez.webp", placeholder: "Lámina Chocafé" }
+        ];
+
+        let cart = [];
+
+        // --- ELEMENTOS DEL DOM ---
+        const productList = document.getElementById('product-list');
+        const cartButton = document.getElementById('cart-button');
+        const closeCartButton = document.getElementById('close-cart-button');
+        const cartSidebar = document.getElementById('cart-sidebar');
+        const cartCount = document.getElementById('cart-count');
+        const cartItemsContainer = document.getElementById('cart-items');
+        const cartTotal = document.getElementById('cart-total');
+        const checkoutButton = document.getElementById('checkout-button');
+        const cartEmptyMessage = document.getElementById('cart-empty-message');
+        const modal = document.getElementById('product-modal');
+        const modalContent = document.getElementById('modal-content');
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        // --- FUNCIONES ---
+
+        // Renderizar todos los productos en la página
+        function renderProducts() {
+            productList.innerHTML = ''; // Limpiar productos existentes
+            products.forEach(product => {
+                const productCard = `
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 cursor-pointer border border-chocolate-100" data-product-id="${product.id}">
+                        <picture>
+                            <source srcset="images/${product.image}" type="image/webp">
+                            <img src="images/${product.image.replace('.webp', '.jpg')}" 
+                                 onerror="this.onerror=null;this.src='https://placehold.co/400x300/6B4F4B/fdf8f2?text=${encodeURIComponent(product.placeholder)}';"
+                                 alt="Imagen de ${product.name}" class="w-full h-56 object-cover">
+                        </picture>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold font-display text-chocolate-800">${product.name}</h3>
+                            <p class="mt-2 text-2xl font-semibold text-gold-500">$${product.price.toFixed(2)}</p>
+                            <button class="add-to-cart-btn mt-4 w-full bg-chocolate-800 text-white py-2 px-4 rounded-lg hover:bg-chocolate-700 transition duration-300" data-product-id="${product.id}">
+                                <i class="fas fa-cart-plus mr-2"></i>Añadir al carrito
+                            </button>
+                        </div>
+                    </div>
+                `;
+                productList.innerHTML += productCard;
+            });
+        }
+
+        // Renderizar ítems en el carrito de compras
+        function renderCart() {
+            cartItemsContainer.innerHTML = '';
+            if (cart.length === 0) {
+                cartItemsContainer.appendChild(cartEmptyMessage);
+                cartEmptyMessage.style.display = 'block';
+            } else {
+                cartEmptyMessage.style.display = 'none';
+                cart.forEach(item => {
+                    const cartItem = document.createElement('div');
+                    cartItem.className = 'flex items-center justify-between mb-4';
+                    cartItem.innerHTML = `
+                        <div class="flex items-center">
+                            <picture>
+                                <source srcset="images/${item.image}" type="image/webp">
+                                <img src="images/${item.image.replace('.webp', '.jpg')}"
+                                     onerror="this.onerror=null;this.src='https://placehold.co/100x100/6B4F4B/fdf8f2?text=X';"
+                                     alt="Imagen de ${item.name}" class="w-16 h-16 object-cover rounded-md mr-4">
+                            </picture>
+                            <div>
+                                <h4 class="font-bold text-sm">${item.name}</h4>
+                                <p class="text-gray-500 text-xs">$${item.price.toFixed(2)}</p>
+                                <div class="flex items-center mt-1">
+                                    <button class="quantity-change text-gray-500" data-id="${item.id}" data-change="-1">-</button>
+                                    <span class="mx-2 text-sm">${item.quantity}</span>
+                                    <button class="quantity-change text-gray-500" data-id="${item.id}" data-change="1">+</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="font-bold">$${(item.price * item.quantity).toFixed(2)}</p>
+                            <button class="remove-from-cart text-red-500 text-xs hover:text-red-700 mt-1" data-id="${item.id}">Eliminar</button>
+                        </div>
+                    `;
+                    cartItemsContainer.appendChild(cartItem);
+                });
+            }
+            updateCartSummary();
+        }
+
+        // Actualizar contador y precio total del carrito
+        function updateCartSummary() {
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+            cartCount.textContent = totalItems;
+            cartTotal.textContent = `$${totalPrice.toFixed(2)}`;
+        }
+
+        // Añadir un ítem al carrito
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const existingItem = cart.find(item => item.id === productId);
+
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+            renderCart();
+            showCart();
+        }
+
+        // Cambiar la cantidad de un ítem en el carrito
+        function changeQuantity(productId, change) {
+            const item = cart.find(i => i.id === productId);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    removeFromCart(productId);
+                }
+            }
+            renderCart();
+        }
+
+        // Eliminar un ítem del carrito
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            renderCart();
+        }
+
+        // Mostrar/ocultar la barra lateral del carrito
+        function showCart() {
+            cartSidebar.classList.remove('translate-x-full');
+        }
+
+        function hideCart() {
+            cartSidebar.classList.add('translate-x-full');
+        }
+
+        // Mostrar el modal del producto con detalles
+        function showProductModal(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            modalContent.innerHTML = `
+                <button id="close-modal-button" class="absolute top-4 right-4 text-2xl text-gray-500 hover:text-chocolate-800">&times;</button>
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="md:w-1/2">
+                        <picture>
+                             <source srcset="images/${product.image}" type="image/webp">
+                             <img src="images/${product.image.replace('.webp', '.jpg')}"
+                                  onerror="this.onerror=null;this.src='https://placehold.co/400x400/6B4F4B/fdf8f2?text=${encodeURIComponent(product.placeholder)}';"
+                                  alt="Imagen detallada de ${product.name}" class="w-full h-auto rounded-lg shadow-md">
+                        </picture>
+                    </div>
+                    <div class="md:w-1/2">
+                        <h2 class="text-3xl font-display font-bold text-chocolate-800">${product.name}</h2>
+                        <p class="text-sm bg-gold-500 text-chocolate-800 inline-block px-3 py-1 rounded-full mt-2">${product.category}</p>
+                        <p class="mt-4 text-gray-600">${product.description}</p>
+                        <p class="mt-6 text-4xl font-semibold text-gold-500">$${product.price.toFixed(2)} / ${product.unit}</p>
+                        <button class="add-to-cart-btn mt-6 w-full bg-chocolate-800 text-white py-3 px-6 rounded-lg hover:bg-chocolate-700 transition duration-300 text-lg" data-product-id="${product.id}">
+                            <i class="fas fa-cart-plus mr-2"></i>Añadir al carrito
+                        </button>
+                    </div>
+                </div>
+            `;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden'; // Prevenir scroll del fondo
+        }
+
+        // Ocultar el modal del producto
+        function hideProductModal() {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = 'auto';
+        }
+
+        // --- MANEJADORES DE EVENTOS ---
+        cartButton.addEventListener('click', () => cartSidebar.classList.toggle('translate-x-full'));
+        closeCartButton.addEventListener('click', hideCart);
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        checkoutButton.addEventListener('click', () => {
+            if (cart.length === 0) {
+                // SUGERENCIA: Reemplazar este alert con un modal personalizado para una mejor UX.
+                alert("Tu carrito está vacío. Agrega productos antes de finalizar la compra.");
+                return;
+            }
+
+            const orderSummary = cart.map(item => `${item.quantity} x ${item.name}`).join('\n');
+            const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2);
+            const message = encodeURIComponent(`¡Hola! Quiero hacer un pedido:\n\n${orderSummary}\n\nTotal: $${total}`);
+            const phoneNumber = "7712794633"; // Número de teléfono para WhatsApp
+            const whatsappURL = `https://wa.me/${phoneNumber}?text=${message}`;
+
+            window.open(whatsappURL, '_blank');
+            hideCart();
+        });
+
+        // Delegación de eventos para elementos creados dinámicamente
+        document.addEventListener('click', (e) => {
+            const addToCartBtn = e.target.closest('.add-to-cart-btn');
+            const removeFromCartBtn = e.target.closest('.remove-from-cart');
+            const quantityChangeBtn = e.target.closest('.quantity-change');
+            const productCard = e.target.closest('.bg-white.rounded-lg.shadow-lg');
+
+            if (addToCartBtn) {
+                const productId = parseInt(addToCartBtn.dataset.productId);
+                addToCart(productId);
+            } else if (removeFromCartBtn) {
+                const productId = parseInt(removeFromCartBtn.dataset.id);
+                removeFromCart(productId);
+            } else if (quantityChangeBtn) {
+                const productId = parseInt(quantityChangeBtn.dataset.id);
+                const change = parseInt(quantityChangeBtn.dataset.change);
+                changeQuantity(productId, change);
+            } else if (productCard && productCard.dataset.productId) {
+                const productId = parseInt(productCard.dataset.productId);
+                showProductModal(productId);
+            } else if (e.target.id === 'close-modal-button') {
+                hideProductModal();
+            }
+        });
+        
+        // Cerrar modal al hacer clic fuera del contenido
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                hideProductModal();
+            }
+        });
+
+        // Cerrar modal y carrito con la tecla Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                hideProductModal();
+                hideCart();
+            }
+        });
+
+        // --- INICIALIZACIÓN ---
+        renderProducts();
+        renderCart();
+    });
+    </script>
+</body>
+</html>

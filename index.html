@@ -4,116 +4,582 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>XocoLate - Chocolatería Artesanal</title>
-    
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts -->
+
+    <!-- Google Fonts - Tipografía Editorial Refinada -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
-        /* Estilos Personalizados y Aplicación de Fuentes */
+        :root {
+            /* Color de marca principal - Verde XocoLate */
+            --xoco-green: #1eac8b;
+            --xoco-green-light: #2bc9a4;
+            --xoco-green-dark: #178f72;
+
+            /* Paleta chocolate */
+            --chocolate-950: #1a0f0a;
+            --chocolate-900: #2d1810;
+            --chocolate-800: #3d2317;
+            --chocolate-700: #4a2c1a;
+            --chocolate-600: #5c3a24;
+            --chocolate-500: #6B4F4B;
+            --chocolate-400: #8B7355;
+            --chocolate-300: #A89078;
+            --chocolate-200: #D4C4B0;
+            --chocolate-100: #E8DFD3;
+            --chocolate-50: #FAF7F4;
+
+            /* Acentos dorados */
+            --gold-600: #B8860B;
+            --gold-500: #D4AF37;
+            --gold-400: #E6C55C;
+            --gold-300: #F0D77A;
+
+            --cream: #FDF8F2;
+            --cream-warm: #F5EDE0;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #fdf8f2; /* Fondo crema claro */
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--cream);
+            color: var(--chocolate-900);
+            overflow-x: hidden;
         }
+
         h1, h2, h3, .font-display {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            letter-spacing: -0.02em;
         }
-        .bg-chocolate-800 { background-color: #1eac8b; }
-        .bg-chocolate-700 { background-color: #6B4F4B; }
-        .bg-chocolate-100 { background-color: #EFEBE9; }
-        .text-gold-500 { color: #D4AF37; }
-        .border-gold-500 { border-color: #D4AF37; }
-        .ring-gold-500 { --tw-ring-color: #D4AF37; }
-        
-        /* Comportamiento de desplazamiento suave */
+
+        /* Textura de fondo artesanal sutil */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Colores personalizados para Tailwind */
+        .bg-xoco-green { background-color: var(--xoco-green); }
+        .bg-xoco-green-dark { background-color: var(--xoco-green-dark); }
+        .text-xoco-green { color: var(--xoco-green); }
+        .border-xoco-green { border-color: var(--xoco-green); }
+
+        .bg-chocolate-950 { background-color: var(--chocolate-950); }
+        .bg-chocolate-900 { background-color: var(--chocolate-900); }
+        .bg-chocolate-800 { background-color: var(--xoco-green); } /* Header usa verde de marca */
+        .bg-chocolate-700 { background-color: var(--chocolate-700); }
+        .bg-chocolate-600 { background-color: var(--chocolate-600); }
+        .bg-chocolate-100 { background-color: var(--chocolate-100); }
+        .bg-chocolate-50 { background-color: var(--chocolate-50); }
+        .bg-cream { background-color: var(--cream); }
+        .bg-cream-warm { background-color: var(--cream-warm); }
+
+        .text-chocolate-900 { color: var(--chocolate-900); }
+        .text-chocolate-800 { color: var(--chocolate-800); }
+        .text-chocolate-700 { color: var(--chocolate-700); }
+        .text-chocolate-600 { color: var(--chocolate-600); }
+        .text-chocolate-500 { color: var(--chocolate-500); }
+        .text-chocolate-400 { color: var(--chocolate-400); }
+
+        .text-gold-500 { color: var(--gold-500); }
+        .text-gold-400 { color: var(--gold-400); }
+        .border-gold-500 { border-color: var(--gold-500); }
+        .border-chocolate-200 { border-color: var(--chocolate-200); }
+        .ring-gold-500 { --tw-ring-color: var(--gold-500); }
+        .bg-gold-500 { background-color: var(--gold-500); }
+        .bg-gold-400 { background-color: var(--gold-400); }
+
         html {
             scroll-behavior: smooth;
         }
 
-        /* Transición personalizada para el carrito */
-        #cart-sidebar {
-            transition: transform 0.3s ease-in-out;
+        /* Header con verde de marca */
+        .header-brand {
+            background: linear-gradient(135deg, var(--xoco-green) 0%, var(--xoco-green-dark) 100%);
+            box-shadow: 0 4px 30px rgba(30, 172, 139, 0.3);
         }
 
-        /* Animación para el modal */
+        /* Botón dorado premium */
+        .btn-gold {
+            background: linear-gradient(135deg, var(--gold-500) 0%, var(--gold-400) 50%, var(--gold-500) 100%);
+            background-size: 200% 200%;
+            color: var(--chocolate-950);
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-gold::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .btn-gold:hover {
+            background-position: 100% 100%;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px -10px rgba(212, 175, 55, 0.5);
+        }
+
+        .btn-gold:hover::before {
+            left: 100%;
+        }
+
+        /* Botón verde de marca */
+        .btn-xoco {
+            background: linear-gradient(135deg, var(--xoco-green) 0%, var(--xoco-green-dark) 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .btn-xoco:hover {
+            background: linear-gradient(135deg, var(--xoco-green-light) 0%, var(--xoco-green) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px -10px rgba(30, 172, 139, 0.5);
+        }
+
+        /* Tarjetas de producto elegantes */
+        .product-card {
+            background: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid var(--chocolate-100);
+            position: relative;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 1rem;
+            padding: 1px;
+            background: linear-gradient(135deg, transparent 40%, var(--xoco-green) 100%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(30, 172, 139, 0.2);
+        }
+
+        .product-card:hover::before {
+            opacity: 1;
+        }
+
+        .product-card img {
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .product-card:hover img {
+            transform: scale(1.08);
+        }
+
+        /* Carrito sidebar */
+        #cart-sidebar {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: -10px 0 50px rgba(0,0,0,0.15);
+        }
+
+        /* Animaciones */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; transform: scale(0.95); }
             to { opacity: 1; transform: scale(1); }
         }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(37, 211, 102, 0.4); }
+            50% { box-shadow: 0 0 35px rgba(37, 211, 102, 0.6); }
+        }
+
+        @keyframes wave {
+            0% { transform: rotate(0deg); }
+            10% { transform: rotate(14deg); }
+            20% { transform: rotate(-8deg); }
+            30% { transform: rotate(14deg); }
+            40% { transform: rotate(-4deg); }
+            50% { transform: rotate(10deg); }
+            60% { transform: rotate(0deg); }
+            100% { transform: rotate(0deg); }
+        }
+
         .modal-fade-in {
             animation: fadeIn 0.3s ease-out forwards;
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        /* Hero section con patrón y verde de marca */
+        .hero-pattern {
+            background-color: var(--chocolate-100);
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(30, 172, 139, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(30, 172, 139, 0.06) 0%, transparent 40%),
+                radial-gradient(circle at 40% 80%, rgba(212, 175, 55, 0.05) 0%, transparent 40%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-pattern::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(30, 172, 139, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        /* Separador decorativo verde */
+        .decorative-line {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--xoco-green), transparent);
+            width: 120px;
+            margin: 0 auto;
+        }
+
+        /* ====== CHATBOT FLOTANTE NAT ====== */
+        .chatbot-float {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 12px;
+        }
+
+        .chatbot-tooltip {
+            background: white;
+            color: var(--chocolate-900);
+            padding: 14px 20px;
+            border-radius: 20px 20px 4px 20px;
+            font-size: 14px;
+            font-weight: 500;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+            opacity: 0;
+            transform: translateY(10px) scale(0.9);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+            white-space: nowrap;
+            border: 2px solid var(--xoco-green);
+        }
+
+        .chatbot-tooltip::before {
+            content: '💬';
+            margin-right: 8px;
+        }
+
+        .chatbot-float:hover .chatbot-tooltip {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .chatbot-btn {
+            width: 68px;
+            height: 68px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: pulse-glow 2s ease-in-out infinite;
+            border: none;
+            position: relative;
+            overflow: visible;
+        }
+
+        .chatbot-btn:hover {
+            transform: scale(1.1);
+            animation: none;
+            box-shadow: 0 15px 40px rgba(37, 211, 102, 0.4);
+        }
+
+        .chatbot-btn i {
+            font-size: 30px;
+            transition: transform 0.3s ease;
+        }
+
+        .chatbot-btn:hover i {
+            animation: wave 1s ease-in-out;
+        }
+
+        .chatbot-name {
+            position: absolute;
+            bottom: -6px;
+            right: -6px;
+            background: linear-gradient(135deg, var(--xoco-green) 0%, var(--xoco-green-dark) 100%);
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(30, 172, 139, 0.4);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        /* Scrollbar personalizado con verde de marca */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--chocolate-50);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--xoco-green);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--xoco-green-dark);
+        }
+
+        /* Enlaces de navegación */
+        .nav-link {
+            position: relative;
+            color: white;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold-500);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--gold-400);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Precio con gradiente dorado */
+        .price-tag {
+            background: linear-gradient(135deg, var(--gold-500), var(--gold-400));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Imagen nosotros con overlay verde */
+        .nosotros-image {
+            position: relative;
+        }
+
+        .nosotros-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(30, 172, 139, 0.1) 0%, transparent 60%);
+            border-radius: 1rem;
+            pointer-events: none;
+        }
+
+        /* Mobile menu */
+        #mobile-menu {
+            background: linear-gradient(180deg, var(--xoco-green) 0%, var(--xoco-green-dark) 100%);
+        }
+
+        #mobile-menu a {
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Footer con verde de marca */
+        .footer-brand {
+            background: linear-gradient(180deg, var(--xoco-green) 0%, var(--xoco-green-dark) 100%);
+        }
+
+        /* Badge categoría con verde */
+        .category-badge {
+            background: linear-gradient(135deg, var(--xoco-green) 0%, var(--xoco-green-dark) 100%);
+            color: white;
+        }
+
+        /* Responsive chatbot */
+        @media (max-width: 640px) {
+            .chatbot-float {
+                bottom: 16px;
+                right: 16px;
+            }
+
+            .chatbot-btn {
+                width: 60px;
+                height: 60px;
+            }
+
+            .chatbot-btn i {
+                font-size: 26px;
+            }
+
+            .chatbot-tooltip {
+                display: none;
+            }
+        }
+
+        /* Iconos de contacto con verde */
+        .contact-icon {
+            color: var(--xoco-green);
+        }
+
+        /* Social hover verde */
+        .social-link:hover {
+            color: var(--gold-400);
         }
     </style>
 </head>
 <body class="text-chocolate-800">
 
     <!-- Encabezado y Navegación -->
-    <header class="bg-chocolate-800 text-white shadow-lg sticky top-0 z-40">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-3xl font-display font-bold text-gold-500"><img src="images/xocolate.png" alt="XocoLate Logo" class="h-24"></a>
-            <nav class="hidden md:flex items-center space-x-8">
-                <a href="#productos" class="hover:text-gold-500 transition duration-300">Catálogo</a>
-                <a href="#nosotros" class="hover:text-gold-500 transition duration-300">Nosotros</a>
-                <a href="#contacto" class="hover:text-gold-500 transition duration-300">Contacto</a>
+    <header class="header-brand text-white shadow-lg sticky top-0 z-40">
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <a href="#" class="flex items-center">
+                <img src="images/xocolate.png" alt="XocoLate Logo" class="h-20 md:h-24 transition-transform hover:scale-105">
+            </a>
+            <nav class="hidden md:flex items-center space-x-10">
+                <a href="#productos" class="nav-link font-medium tracking-wide">Catálogo</a>
+                <a href="#nosotros" class="nav-link font-medium tracking-wide">Nosotros</a>
+                <a href="#contacto" class="nav-link font-medium tracking-wide">Contacto</a>
             </nav>
-            <div class="flex items-center">
-                <button id="cart-button" class="relative hover:text-gold-500 transition duration-300">
+            <div class="flex items-center gap-4">
+                <button id="cart-button" class="relative p-2 hover:bg-white/10 rounded-full transition duration-300">
                     <i class="fas fa-shopping-cart text-xl"></i>
-                    <span id="cart-count" class="absolute -top-2 -right-3 bg-gold-500 text-chocolate-800 text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                    <span id="cart-count" class="absolute -top-1 -right-1 bg-gold-500 text-chocolate-900 text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center shadow-lg">0</span>
                 </button>
-                <button id="mobile-menu-button" class="md:hidden ml-6 text-2xl">
-                    <i class="fas fa-bars"></i>
+                <button id="mobile-menu-button" class="md:hidden p-2 hover:bg-white/10 rounded-full transition">
+                    <i class="fas fa-bars text-xl"></i>
                 </button>
             </div>
         </div>
         <!-- Menú Móvil -->
-        <div id="mobile-menu" class="hidden md:hidden bg-chocolate-700">
-            <a href="#productos" class="block text-center py-3 px-4 text-sm hover:bg-gold-500 hover:text-chocolate-800 transition duration-300">Catálogo</a>
-            <a href="#nosotros" class="block text-center py-3 px-4 text-sm hover:bg-gold-500 hover:text-chocolate-800 transition duration-300">Nosotros</a>
-            <a href="#contacto" class="block text-center py-3 px-4 text-sm hover:bg-gold-500 hover:text-chocolate-800 transition duration-300">Contacto</a>
+        <div id="mobile-menu" class="hidden md:hidden">
+            <a href="#productos" class="block text-center py-4 px-4 font-medium hover:bg-white/10 transition duration-300">Catálogo</a>
+            <a href="#nosotros" class="block text-center py-4 px-4 font-medium hover:bg-white/10 transition duration-300">Nosotros</a>
+            <a href="#contacto" class="block text-center py-4 px-4 font-medium hover:bg-white/10 transition duration-300">Contacto</a>
         </div>
     </header>
 
     <!-- Sección Hero -->
-    <section class="bg-chocolate-100 py-20">
-        <div class="container mx-auto px-6 text-center">
-            <h1 class="text-4xl md:text-6xl font-bold text-chocolate-800 leading-tight">El Arte del Chocolate Hecho a Mano</h1>
-            <p class="mt-4 text-lg text-chocolate-700 max-w-2xl mx-auto">Descubre una sinfonía de sabores únicos, creados con pasión y los mejores granos de cacao.</p>
-            <a href="#productos" class="mt-8 inline-block bg-gold-500 text-chocolate-800 font-bold py-3 px-8 rounded-lg shadow-lg hover:bg-opacity-90 transition duration-300 transform hover:scale-105">Ver Productos</a>
+    <section class="hero-pattern py-24 md:py-32">
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <div class="decorative-line mb-8"></div>
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-chocolate-900 leading-tight animate-fade-in-up">
+                El Arte del Chocolate<br><span class="text-xoco-green">Hecho a Mano</span>
+            </h1>
+            <p class="mt-6 text-lg md:text-xl text-chocolate-600 max-w-2xl mx-auto leading-relaxed" style="animation: fadeInUp 0.6s ease-out 0.2s forwards; opacity: 0;">
+                Descubre una sinfonía de sabores únicos, creados con pasión y los mejores granos de cacao.
+            </p>
+            <a href="#productos" class="mt-10 inline-block btn-gold py-4 px-10 rounded-full shadow-xl text-lg" style="animation: fadeInUp 0.6s ease-out 0.4s forwards; opacity: 0;">
+                <i class="fas fa-leaf mr-2"></i>Ver Productos
+            </a>
         </div>
     </section>
 
     <!-- Sección "Nosotros" -->
-    <section id="nosotros" class="py-20">
-        <div class="container mx-auto px-6 flex flex-col md:flex-row items-center gap-12">
-            <div class="md:w-1/2">
+    <section id="nosotros" class="py-24 md:py-32 bg-cream">
+        <div class="container mx-auto px-6 flex flex-col md:flex-row items-center gap-16">
+            <div class="md:w-1/2 nosotros-image">
                 <picture>
                     <source srcset="images/nosotros_banner.webp" type="image/webp">
-                    <!-- CORRECCIÓN: Se ha cerrado correctamente la etiqueta img -->
-                    <img src="images/nosotros_banner.jpg" 
-                         onerror="this.onerror=null;this.src='https://placehold.co/600x400/4A2E2A/fdf8f2?text=XocoLate';"
-                         alt="Artesanos preparando chocolate a mano en un taller rústico." class="rounded-lg shadow-2xl w-full">
+                    <img src="images/nosotros_banner.jpg"
+                         onerror="this.onerror=null;this.src='https://placehold.co/600x400/1eac8b/fdf8f2?text=XocoLate';"
+                         alt="Artesanos preparando chocolate a mano en un taller rústico." class="rounded-2xl shadow-2xl w-full">
                 </picture>
             </div>
             <div class="md:w-1/2">
-                <h2 class="text-4xl font-display font-bold text-chocolate-800">Nuestra Pasión, Tu Deleite</h2>
-                <p class="mt-4 text-gray-600">En XocoLate, cada pieza es una obra de arte. Nacimos de un sueño por revivir las recetas tradicionales con un toque moderno y audaz. Seleccionamos a mano cada ingrediente, asegurando que solo lo mejor llegue a tu paladar. Somos más que chocolateros; somos artesanos de momentos felices.</p>
-                <p class="mt-4 text-gray-600">Nuestra filosofía se basa en la pureza, la calidad y la creatividad. Te invitamos a explorar nuestro mundo y a enamorarte del verdadero sabor del chocolate.</p>
+                <div class="decorative-line mb-6" style="margin-left: 0;"></div>
+                <h2 class="text-4xl md:text-5xl font-display font-bold text-chocolate-900">
+                    Nuestra Pasión,<br><span class="text-xoco-green">Tu Deleite</span>
+                </h2>
+                <p class="mt-6 text-chocolate-600 text-lg leading-relaxed">
+                    En XocoLate, cada pieza es una obra de arte. Nacimos de un sueño por revivir las recetas tradicionales con un toque moderno y audaz. Seleccionamos a mano cada ingrediente, asegurando que solo lo mejor llegue a tu paladar.
+                </p>
+                <p class="mt-4 text-chocolate-600 text-lg leading-relaxed">
+                    Somos más que chocolateros; somos <strong class="text-xoco-green">artesanos de momentos felices</strong>. Nuestra filosofía se basa en la pureza, la calidad y la creatividad.
+                </p>
+                <a href="#productos" class="mt-8 inline-block btn-xoco py-3 px-8 rounded-full font-semibold">
+                    <i class="fas fa-cocoa-bean mr-2"></i>Explorar Catálogo
+                </a>
             </div>
         </div>
     </section>
 
     <!-- Sección de Productos -->
-    <section id="productos" class="py-20 bg-white">
+    <section id="productos" class="py-24 md:py-32 bg-chocolate-50">
         <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-display font-bold text-center text-chocolate-800 mb-12">Catálogo de Delicias</h2>
+            <div class="text-center mb-16">
+                <div class="decorative-line mb-6"></div>
+                <h2 class="text-4xl md:text-5xl font-display font-bold text-chocolate-900">
+                    Catálogo de <span class="text-xoco-green">Delicias</span>
+                </h2>
+                <p class="mt-4 text-chocolate-600 text-lg max-w-xl mx-auto">
+                    Cada creación es una experiencia única, elaborada con ingredientes selectos y mucho amor.
+                </p>
+            </div>
             <div id="product-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                 <!-- Las tarjetas de producto serán inyectadas aquí por JavaScript -->
             </div>
@@ -121,54 +587,94 @@
     </section>
 
     <!-- Sección de Contacto -->
-    <section id="contacto" class="py-20 bg-chocolate-100">
+    <section id="contacto" class="py-24 md:py-32 bg-chocolate-100">
         <div class="container mx-auto px-6 text-center">
-            <h2 class="text-4xl font-display font-bold text-chocolate-800">Ponte en Contacto</h2>
-            <p class="mt-4 text-lg text-chocolate-700 max-w-2xl mx-auto">¿Pedidos especiales o preguntas? Estamos aquí para ayudarte.</p>
-            <div class="mt-8 text-chocolate-700">
-                <p class="text-xl"><i class="fas fa-envelope mr-2 text-gold-500"></i> xocolateconamor@gmail.com</p>
-                <p class="text-xl mt-2"><i class="fas fa-phone mr-2 text-gold-500"></i> 7712794633</p>
-                <p class="text-xl mt-2"><i class="fas fa-map-marker-alt mr-2 text-gold-500"></i> Los Viñedos </p>
+            <div class="decorative-line mb-6"></div>
+            <h2 class="text-4xl md:text-5xl font-display font-bold text-chocolate-900">
+                Ponte en <span class="text-xoco-green">Contacto</span>
+            </h2>
+            <p class="mt-4 text-lg text-chocolate-600 max-w-2xl mx-auto">
+                ¿Pedidos especiales o preguntas? Estamos aquí para ayudarte.
+            </p>
+            <div class="mt-10 flex flex-col md:flex-row justify-center items-center gap-8 md:gap-12">
+                <div class="flex items-center gap-3 text-chocolate-700">
+                    <div class="w-12 h-12 rounded-full bg-xoco-green/10 flex items-center justify-center">
+                        <i class="fas fa-envelope text-xl contact-icon"></i>
+                    </div>
+                    <span class="text-lg">xocolateconamor@gmail.com</span>
+                </div>
+                <div class="flex items-center gap-3 text-chocolate-700">
+                    <div class="w-12 h-12 rounded-full bg-xoco-green/10 flex items-center justify-center">
+                        <i class="fas fa-phone text-xl contact-icon"></i>
+                    </div>
+                    <span class="text-lg">7712794633</span>
+                </div>
+                <div class="flex items-center gap-3 text-chocolate-700">
+                    <div class="w-12 h-12 rounded-full bg-xoco-green/10 flex items-center justify-center">
+                        <i class="fas fa-map-marker-alt text-xl contact-icon"></i>
+                    </div>
+                    <span class="text-lg">Los Viñedos</span>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Pie de Página -->
-    <footer class="bg-chocolate-800 text-white py-8">
+    <footer class="footer-brand text-white py-12">
         <div class="container mx-auto px-6 text-center">
-            <p>&copy; 2025 XocoLate. Todos los derechos reservados.</p>
-            <div class="flex justify-center space-x-6 mt-4">
-                <a href="#" class="hover:text-gold-500 transition duration-300"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="hover:text-gold-500 transition duration-300"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="hover:text-gold-500 transition duration-300"><i class="fab fa-twitter"></i></a>
+            <img src="images/xocolate.png" alt="XocoLate Logo" class="h-16 mx-auto mb-6 opacity-90">
+            <p class="text-white/80">&copy; 2026 XocoLate. Todos los derechos reservados.</p>
+            <div class="flex justify-center space-x-6 mt-6">
+                <a href="#" class="social-link text-white/70 hover:text-gold-400 transition duration-300 text-xl"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-link text-white/70 hover:text-gold-400 transition duration-300 text-xl"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-link text-white/70 hover:text-gold-400 transition duration-300 text-xl"><i class="fab fa-tiktok"></i></a>
             </div>
+            <p class="mt-6 text-white/50 text-sm">Desarrollado por <strong class="text-gold-400">FMX AI Flows</strong> By FeyoMx</p>
         </div>
     </footer>
 
     <!-- Modal de Producto -->
-    <div id="product-modal" class="fixed inset-0 bg-black bg-opacity-70 z-50 hidden items-center justify-center p-4">
-        <div id="modal-content" class="bg-white rounded-lg shadow-2xl w-full max-w-2xl max-h-full overflow-y-auto p-6 relative modal-fade-in">
+    <div id="product-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+        <div id="modal-content" class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-full overflow-y-auto p-8 relative modal-fade-in">
             <!-- El contenido del modal será inyectado aquí -->
         </div>
     </div>
 
+    <!-- Chatbot Flotante - Nat -->
+    <div class="chatbot-float">
+        <div class="chatbot-tooltip">¡Hola! Soy Nat, ¿te ayudo?</div>
+        <a href="https://wa.me/527711131304?text=¡Hola%20Nat!%20Me%20gustaría%20saber%20más%20sobre%20los%20productos%20de%20XocoLate"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="chatbot-btn"
+           aria-label="Chatear con Nat por WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+            <span class="chatbot-name">Nat</span>
+        </a>
+    </div>
+
     <!-- Barra Lateral del Carrito -->
-    <div id="cart-sidebar" class="fixed top-0 right-0 h-full w-full max-w-md bg-white shadow-2xl z-50 transform translate-x-full">
+    <div id="cart-sidebar" class="fixed top-0 right-0 h-full w-full max-w-md bg-white z-50 transform translate-x-full">
         <div class="flex flex-col h-full">
-            <div class="flex justify-between items-center p-6 border-b border-gray-200">
-                <h3 class="text-2xl font-display text-chocolate-800">Tu Carrito</h3>
-                <button id="close-cart-button" class="text-2xl text-gray-500 hover:text-chocolate-800">&times;</button>
+            <div class="flex justify-between items-center p-6 border-b border-chocolate-100 bg-chocolate-50">
+                <h3 class="text-2xl font-display text-chocolate-900">Tu Carrito</h3>
+                <button id="close-cart-button" class="w-10 h-10 rounded-full bg-chocolate-100 text-chocolate-600 hover:bg-xoco-green hover:text-white transition-all duration-300 flex items-center justify-center text-xl">&times;</button>
             </div>
-            <div id="cart-items" class="flex-grow p-6 overflow-y-auto">
+            <div id="cart-items" class="flex-grow p-6 overflow-y-auto bg-white">
                 <!-- Los ítems del carrito serán inyectados aquí -->
-                <p id="cart-empty-message" class="text-gray-500">Tu carrito está vacío.</p>
+                <p id="cart-empty-message" class="text-chocolate-400 text-center py-8">
+                    <i class="fas fa-shopping-basket text-4xl mb-4 block text-chocolate-200"></i>
+                    Tu carrito está vacío
+                </p>
             </div>
-            <div class="p-6 border-t border-gray-200">
-                <div class="flex justify-between items-center text-lg font-bold">
+            <div class="p-6 border-t border-chocolate-100 bg-chocolate-50">
+                <div class="flex justify-between items-center text-xl font-bold text-chocolate-900">
                     <span>Total:</span>
-                    <span id="cart-total">$0.00</span>
+                    <span id="cart-total" class="price-tag text-2xl">$0.00</span>
                 </div>
-                <button id="checkout-button" class="w-full mt-4 bg-gold-500 text-chocolate-800 font-bold py-3 rounded-lg shadow-lg hover:bg-opacity-90 transition duration-300">Finalizar Compra</button>
+                <button id="checkout-button" class="w-full mt-4 btn-xoco py-4 rounded-xl font-bold text-lg shadow-lg">
+                    <i class="fab fa-whatsapp mr-2"></i>Finalizar por WhatsApp
+                </button>
             </div>
         </div>
     </div>
@@ -223,19 +729,22 @@
         // Renderizar todos los productos en la página
         function renderProducts() {
             productList.innerHTML = ''; // Limpiar productos existentes
-            products.forEach(product => {
+            products.forEach((product, index) => {
                 const productCard = `
-                    <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 cursor-pointer border border-chocolate-100" data-product-id="${product.id}">
-                        <picture>
-                            <source srcset="images/${product.image}" type="image/webp">
-                            <img src="images/${product.image.replace('.webp', '.jpg')}" 
-                                 onerror="this.onerror=null;this.src='https://placehold.co/400x300/6B4F4B/fdf8f2?text=${encodeURIComponent(product.placeholder)}';"
-                                 alt="Imagen de ${product.name}" class="w-full h-56 object-cover">
-                        </picture>
+                    <div class="product-card cursor-pointer" data-product-id="${product.id}" style="animation: fadeInUp 0.5s ease-out ${index * 0.05}s forwards; opacity: 0;">
+                        <div class="overflow-hidden">
+                            <picture>
+                                <source srcset="images/${product.image}" type="image/webp">
+                                <img src="images/${product.image.replace('.webp', '.jpg')}"
+                                     onerror="this.onerror=null;this.src='https://placehold.co/400x300/1eac8b/fdf8f2?text=${encodeURIComponent(product.placeholder)}';"
+                                     alt="Imagen de ${product.name}" class="w-full h-56 object-cover">
+                            </picture>
+                        </div>
                         <div class="p-6">
-                            <h3 class="text-xl font-bold font-display text-chocolate-800">${product.name}</h3>
-                            <p class="mt-2 text-2xl font-semibold text-gold-500">$${product.price.toFixed(2)}</p>
-                            <button class="add-to-cart-btn mt-4 w-full bg-chocolate-800 text-white py-2 px-4 rounded-lg hover:bg-chocolate-700 transition duration-300" data-product-id="${product.id}">
+                            <span class="text-xs font-semibold text-xoco-green uppercase tracking-wider">${product.category}</span>
+                            <h3 class="text-xl font-bold font-display text-chocolate-900 mt-1 leading-tight">${product.name}</h3>
+                            <p class="mt-3 text-2xl font-semibold price-tag">$${product.price.toFixed(2)}</p>
+                            <button class="add-to-cart-btn mt-4 w-full btn-xoco py-3 px-4 rounded-xl font-medium" data-product-id="${product.id}">
                                 <i class="fas fa-cart-plus mr-2"></i>Añadir al carrito
                             </button>
                         </div>
@@ -339,22 +848,25 @@
             const product = products.find(p => p.id === productId);
             if (!product) return;
             modalContent.innerHTML = `
-                <button id="close-modal-button" class="absolute top-4 right-4 text-2xl text-gray-500 hover:text-chocolate-800">&times;</button>
-                <div class="flex flex-col md:flex-row gap-6">
+                <button id="close-modal-button" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-chocolate-100 text-chocolate-600 hover:bg-xoco-green hover:text-white transition-all duration-300 flex items-center justify-center text-xl">&times;</button>
+                <div class="flex flex-col md:flex-row gap-8">
                     <div class="md:w-1/2">
                         <picture>
                              <source srcset="images/${product.image}" type="image/webp">
                              <img src="images/${product.image.replace('.webp', '.jpg')}"
-                                  onerror="this.onerror=null;this.src='https://placehold.co/400x400/6B4F4B/fdf8f2?text=${encodeURIComponent(product.placeholder)}';"
-                                  alt="Imagen detallada de ${product.name}" class="w-full h-auto rounded-lg shadow-md">
+                                  onerror="this.onerror=null;this.src='https://placehold.co/400x400/1eac8b/fdf8f2?text=${encodeURIComponent(product.placeholder)}';"
+                                  alt="Imagen detallada de ${product.name}" class="w-full h-auto rounded-xl shadow-lg">
                         </picture>
                     </div>
-                    <div class="md:w-1/2">
-                        <h2 class="text-3xl font-display font-bold text-chocolate-800">${product.name}</h2>
-                        <p class="text-sm bg-gold-500 text-chocolate-800 inline-block px-3 py-1 rounded-full mt-2">${product.category}</p>
-                        <p class="mt-4 text-gray-600">${product.description}</p>
-                        <p class="mt-6 text-4xl font-semibold text-gold-500">$${product.price.toFixed(2)} / ${product.unit}</p>
-                        <button class="add-to-cart-btn mt-6 w-full bg-chocolate-800 text-white py-3 px-6 rounded-lg hover:bg-chocolate-700 transition duration-300 text-lg" data-product-id="${product.id}">
+                    <div class="md:w-1/2 flex flex-col">
+                        <span class="category-badge text-sm inline-block px-4 py-1 rounded-full w-fit">${product.category}</span>
+                        <h2 class="text-3xl md:text-4xl font-display font-bold text-chocolate-900 mt-3">${product.name}</h2>
+                        <p class="mt-4 text-chocolate-600 leading-relaxed flex-grow">${product.description}</p>
+                        <div class="mt-6 pt-6 border-t border-chocolate-100">
+                            <p class="text-4xl font-bold price-tag">$${product.price.toFixed(2)}</p>
+                            <p class="text-chocolate-500 text-sm mt-1">por ${product.unit}</p>
+                        </div>
+                        <button class="add-to-cart-btn mt-6 w-full btn-xoco py-4 px-6 rounded-xl text-lg font-semibold" data-product-id="${product.id}">
                             <i class="fas fa-cart-plus mr-2"></i>Añadir al carrito
                         </button>
                     </div>
@@ -402,9 +914,10 @@
             const addToCartBtn = e.target.closest('.add-to-cart-btn');
             const removeFromCartBtn = e.target.closest('.remove-from-cart');
             const quantityChangeBtn = e.target.closest('.quantity-change');
-            const productCard = e.target.closest('.bg-white.rounded-lg.shadow-lg');
+            const productCard = e.target.closest('.product-card');
 
             if (addToCartBtn) {
+                e.stopPropagation(); // Evitar que se abra el modal al hacer clic en el botón
                 const productId = parseInt(addToCartBtn.dataset.productId);
                 addToCart(productId);
             } else if (removeFromCartBtn) {
@@ -417,7 +930,7 @@
             } else if (productCard && productCard.dataset.productId) {
                 const productId = parseInt(productCard.dataset.productId);
                 showProductModal(productId);
-            } else if (e.target.id === 'close-modal-button') {
+            } else if (e.target.id === 'close-modal-button' || e.target.closest('#close-modal-button')) {
                 hideProductModal();
             }
         });
